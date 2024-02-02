@@ -14,7 +14,3 @@ WORKDIR /var/www/html
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install
 RUN composer update
-
-CMD php artisan serve --host=0.0.0.0 --port=8080
-
-EXPOSE 8080
