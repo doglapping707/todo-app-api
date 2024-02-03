@@ -12,9 +12,10 @@ services:
       - ./src:/var/www/html
       - ./conf/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
-      - postgres
+      - postgres-dev
+      - postgres-test
 
-  postgres:
+  postgres-dev:
     build:
       context: .
       dockerfile: ./Dockerfile.postgres
@@ -26,7 +27,22 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_dev:/var/lib/postgresql/data
+
+  postgres-test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
+    tty: true
+    ports:
+      - "5532:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  postgres_data_dev:
+  postgres_data_test:
