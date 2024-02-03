@@ -41,6 +41,40 @@ class TaskTest extends TestCase
     }
 
     /**
+     * abnormality
+     * Cannot create a new task if the title is empty
+     */
+    public function test_store_required_title(): void
+    {
+        $data = [
+            'title' => ''
+        ];
+        $response = $this->postJson('api/tasks', $data);
+        $response
+            ->assertStatus(422)
+            ->assertJsonValidationErrors([
+                'title' => 'The title field is required.'
+            ]);
+    }
+
+    /**
+     * abnormality
+     * Cannot create a new task if the title exceeds the character limit
+     */
+    public function test_store_limit_title(): void
+    {
+        $data = [
+            'title' => str_repeat('あ', 256)
+        ];
+        $response = $this->postJson('api/tasks', $data);
+        $response
+            ->assertStatus(422)
+            ->assertJsonValidationErrors([
+                'title' => 'The title field must not be greater than 255 characters.'
+            ]);
+    }
+
+    /**
      * normality
      * Can update tasks
      */
@@ -54,6 +88,41 @@ class TaskTest extends TestCase
             ->assertNoContent();
     }
 
+    /**
+     * abnormality
+     * Cannot update task if title is empty
+     */
+    public function test_update_required_title(): void
+    {
+        $task = Task::factory()->create();
+        $task->title = '';
+
+        $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
+
+        $response
+            ->assertStatus(422)
+            ->assertJsonValidationErrors([
+                'title' => 'The title field is required.'
+            ]);
+    }
+
+    /**
+     * abnormality
+     * Cannot update task if the title exceeds the character limit
+     */
+    public function test_update_limit_title(): void
+    {
+        $task = Task::factory()->create();
+        $task->title = str_repeat('あ', 256);
+
+        $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
+
+        $response
+            ->assertStatus(422)
+            ->assertJsonValidationErrors([
+                'title' => 'The title field must not be greater than 255 characters.'
+            ]);
+    }
 
     /**
      * normality
