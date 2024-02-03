@@ -136,5 +136,15 @@
                 </div>
             </div>
         </div>
+        <!-- Test DB Connection -->
+        <strong>Database Connected: </strong>
+        <?php
+            try {
+                \DB::connection()->getPDO();
+                echo \DB::connection()->getDatabaseName();
+                } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+        ?>
     </body>
 </html>
