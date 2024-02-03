@@ -11,3 +11,22 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./conf/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - postgres
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
+    tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
