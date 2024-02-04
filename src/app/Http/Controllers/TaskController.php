@@ -9,7 +9,7 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     /**
-     * Get task list
+     * Get the task list.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -19,7 +19,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Create a new task
+     * Create a new task.
      *
      * @param \App\Http\Requests\StoreTaskRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -42,7 +42,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the task
+     * Update the task.
      *
      * @param \App\Http\Requests\UpdateTaskRequest $request
      * @param \App\Models\Task $task
@@ -58,7 +58,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Delete a task
+     * Delete a task.
      *
      * @param \App\Models\Task $task
      * @return \Illuminate\Http\JsonResponse

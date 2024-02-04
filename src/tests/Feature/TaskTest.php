@@ -12,7 +12,7 @@ class TaskTest extends TestCase
 
     /**
      * normality
-     * Can get a list of tasks
+     * Can get a list of tasks.
      */
     public function test_index(): void
     {
@@ -26,7 +26,7 @@ class TaskTest extends TestCase
 
     /**
      * normality
-     * Can create new tasks
+     * Can create new tasks.
      */
     public function test_store(): void
     {
@@ -42,7 +42,7 @@ class TaskTest extends TestCase
 
     /**
      * abnormality
-     * Cannot create a new task if the title is empty
+     * Cannot create a new task if the title is empty.
      */
     public function test_store_required_title(): void
     {
@@ -59,7 +59,7 @@ class TaskTest extends TestCase
 
     /**
      * abnormality
-     * Cannot create a new task if the title exceeds the character limit
+     * Cannot create a new task if the title exceeds the character limit.
      */
     public function test_store_limit_title(): void
     {
@@ -76,7 +76,7 @@ class TaskTest extends TestCase
 
     /**
      * normality
-     * Can update tasks
+     * Can update tasks.
      */
     public function test_update(): void
     {
@@ -90,7 +90,7 @@ class TaskTest extends TestCase
 
     /**
      * abnormality
-     * Cannot update task if title is empty
+     * Cannot update task if title is empty.
      */
     public function test_update_required_title(): void
     {
@@ -108,7 +108,7 @@ class TaskTest extends TestCase
 
     /**
      * abnormality
-     * Cannot update task if the title exceeds the character limit
+     * Cannot update task if the title exceeds the character limit.
      */
     public function test_update_limit_title(): void
     {
@@ -126,7 +126,7 @@ class TaskTest extends TestCase
 
     /**
      * normality
-     * Can delete tasks
+     * Can delete tasks.
      */
     public function test_delete(): void
     {
