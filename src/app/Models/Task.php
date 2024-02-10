@@ -18,13 +18,4 @@ class Task extends Model
         'title',
         'is_done'
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'is_done' => 'boolean',
-    ];
 }
