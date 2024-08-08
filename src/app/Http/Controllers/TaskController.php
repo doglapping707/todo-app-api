@@ -10,7 +10,7 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     /**
-     * Get the task list.
+     * タスク一覧を取得する
      *
      * @return \Illuminate\Support\Collection
      */
@@ -20,7 +20,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Create a new task.
+     * タスクを作成する
      *
      * @param \App\Http\Requests\StoreTaskRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -43,7 +43,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the task.
+     * タスクを更新する
      *
      * @param \App\Http\Requests\UpdateTaskRequest $request
      * @param \App\Models\Task $task
@@ -59,7 +59,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Delete a task.
+     * タスクを削除する
      *
      * @param \App\Models\Task $task
      * @return \Illuminate\Http\JsonResponse
@@ -72,7 +72,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update is_done.
+     * ステータスを更新する
      *
      * @param \App\Http\Requests\UpdateDoneTaskRequest $request
      * @param \App\Models\Task $task

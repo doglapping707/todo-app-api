@@ -2,17 +2,25 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Task;
 
 class TaskTest extends TestCase
 {
-    use RefreshDatabase;
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('migrate');
+    }
+
+    protected function tearDown(): void
+    {
+        Task::truncate();
+    }
 
     /**
-     * normality
-     * Can get a list of tasks.
+     * 正常系
+     * タスク一覧を取得できる
      */
     public function test_index(): void
     {
@@ -25,8 +33,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * normality
-     * Can create new tasks.
+     * 正常系
+     * タスクを作成できる
      */
     public function test_store(): void
     {
@@ -41,8 +49,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot create a new task if the title is empty.
+     * 異常系
+     * タイトルが空の場合はタスクを作成できない
      */
     public function test_store_required_title(): void
     {
@@ -59,8 +67,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot create a new task if the title exceeds the character limit.
+     * 異常系
+     * タイトルが文字数制限を超えた場合はタスクを作成できない
      */
     public function test_store_limit_length_title(): void
     {
@@ -77,8 +85,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * normality
-     * Can update the task title.
+     * 正常系
+     * タスクのタイトルを更新できる
      */
     public function test_update_title(): void
     {
@@ -91,8 +99,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot update task if title is empty.
+     * 異常系
+     * タイトルが空の場合はタスクを更新できない
      */
     public function test_update_required_title(): void
     {
@@ -108,8 +116,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot update task if the title exceeds the character limit.
+     * 異常系
+     * タイトルが文字数制限を超えた場合はタスクを更新できない
      */
     public function test_update_limit_length_title(): void
     {
@@ -125,8 +133,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * normality
-     * Can delete tasks.
+     * 正常系
+     * タスクを削除できる
      */
     public function test_delete(): void
     {
@@ -140,8 +148,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * normality
-     * Can update is_done.
+     * 正常系
+     * ステータスを更新できる
      */
     public function test_updateDone(): void
     {
@@ -154,8 +162,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot update is_done if is_done is empty.
+     * 異常系
+     * is_doneが空の場合はステータスを更新できない
      */
     public function test_updateDone_required(): void
     {
@@ -171,8 +179,8 @@ class TaskTest extends TestCase
     }
 
     /**
-     * abnormality
-     * Cannot update is_done If type is not boolean.
+     * 異常系
+     * is_doneの型が真偽値でない場合はステータスを更新できない
      */
     public function test_updateDone_limit_type(): void
     {
