@@ -2,7 +2,7 @@
 Todoリストのタスクの作成・更新・削除などを行えるAPIです
 
 ## インストール・起動方法
-⚠️***事前にdocker/docker-composeのインストールが必要です***
+⚠︎***事前にdocker/docker-composeのインストールが必要です***
 ```
 git clone https://github.com/doglapping707/todo-api-php
 cd todo-api-php
