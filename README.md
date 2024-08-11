@@ -25,5 +25,14 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/tasks' \
 }'
 ```
 
+### ▼ステータス更新API
+```
+curl -i --request PATCH 'https://todo-api-php.onrender.com/api/tasks/update-done/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "is_done": true
+}'
+```
+
 ## 参考にしたサイト
 [React.js + Laravel SPA開発講座](https://www.youtube.com/watch?v=hPjcbKtpTjY&list=PL3B2bjwrmhfQkcBEww0gN_kcRAHntAgxG&pp=iAQB)
