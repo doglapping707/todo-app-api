@@ -22,7 +22,20 @@ class StoreTaskRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255'
+            'title' => 'required|max:40'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'タイトルが入力されていません。',
+            'title.max'      => 'タイトルが40文字を超えています。',
         ];
     }
 }
