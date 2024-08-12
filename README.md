@@ -10,6 +10,33 @@ docker-compose up
 docker-compose exec -it server bash
 ```
 
+## .envの作成
+1. `.env.example`をコピーし、同じ階層に`.env`と`.env.testing`を作成してください。
+2. 下記を参考に環境変数の値を変更してください。
+    ```
+    APP_KEY=
+    ~~~
+    DB_CONNECTION=pgsql
+    DB_HOST=
+    DB_PORT=5432
+    DB_DATABASE=postgres
+    DB_USERNAME=root
+    DB_PASSWORD=password
+    ```
+3. ```php artisan key:generate```を実行し生成したkeyを`APP_KEY`に設定してください。
+    ```
+    APP_KEY=base64:xxxxxxx
+    ```
+4. `DB_HOST`の値をファイル毎に設定してください。  
+   *.env*
+   ```
+   DB_HOST=postgres-dev
+   ```
+   *.env.testing*
+   ```
+   DB_HOST=postgres-test
+   ```
+
 ## API一覧
 ### ▼タスク一覧取得API
 ```
