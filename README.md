@@ -16,7 +16,7 @@ docker-compose exec -it server bash
 curl -i --request GET 'https://todo-api-php.onrender.com/api/tasks'
 ```
 
-### ▼新規タスク作成API
+### ▼タスク登録API
 ```
 curl -i --request POST 'https://todo-api-php.onrender.com/api/tasks' \
 --header 'Content-Type: application/json' \
