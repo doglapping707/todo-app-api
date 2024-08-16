@@ -11,7 +11,7 @@ docker-compose exec -it server bash
 ```
 
 ## .envの作成
-1. `.env.example`をコピーし、同じ階層に`.env`と`.env.testing`を作成してください。
+1. src配下の`.env.example`をコピーし、同じ階層に`.env`と`.env.testing`を作成してください。
 2. 下記を参考に環境変数の値を変更してください。
     ```
     APP_KEY=
