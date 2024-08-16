@@ -52,6 +52,15 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/tasks' \
 }'
 ```
 
+### ▼タスク更新API
+```
+curl -i --request PUT 'https://todo-api-php.onrender.com/api/tasks/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "Sample Task_2"
+}'
+```
+
 ### ▼ステータス更新API
 ```
 curl -i --request PATCH 'https://todo-api-php.onrender.com/api/tasks/update-done/1' \
@@ -59,6 +68,11 @@ curl -i --request PATCH 'https://todo-api-php.onrender.com/api/tasks/update-done
 --data-raw '{
     "is_done": true
 }'
+```
+
+### ▼タスク削除API
+```
+curl -i --request DELETE 'https://todo-api-php.onrender.com/api/tasks/1'
 ```
 
 ## 参考にしたサイト
