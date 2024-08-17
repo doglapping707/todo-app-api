@@ -1,8 +1,8 @@
 ## このAPIについて
-Todoリストのタスクの作成・更新・削除などを行えるAPIです
+Todoリストのタスクの作成・更新・削除などを行えるAPIです。
 
 ## インストール・起動方法
-⚠︎***事前にdocker/docker-composeのインストールが必要です***
+⚠︎***事前にdocker/docker-composeのインストールが必要です。***
 ```
 git clone https://github.com/doglapping707/todo-api-php
 cd todo-api-php
@@ -15,13 +15,15 @@ docker-compose exec -it server bash
 2. 下記を参考に環境変数の値を変更してください。
     ```
     APP_KEY=
-    ~~~
+    ~~略~~
     DB_CONNECTION=pgsql
     DB_HOST=
     DB_PORT=5432
     DB_DATABASE=postgres
     DB_USERNAME=root
     DB_PASSWORD=password
+    ~~略~~
+    SESSION_DRIVER=cookie
     ```
 3. ```php artisan key:generate```を実行し生成したkeyを`APP_KEY`に設定してください。
     ```
@@ -35,6 +37,11 @@ docker-compose exec -it server bash
    *.env.testing*
    ```
    DB_HOST=postgres-test
+   ```
+5. 下記の値をコピーし、ファイル毎に設定してください。
+   ```
+   SESSION_DOMAIN=localhost
+   SANCTUM_STATEFUL_DOMAINS=http://{フロント側のFQDN}
    ```
 
 ## API一覧
