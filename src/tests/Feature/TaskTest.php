@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Task;
+use App\Models\User;
 
 class TaskTest extends TestCase
 {
@@ -11,6 +12,9 @@ class TaskTest extends TestCase
     {
         parent::setUp();
         $this->artisan('migrate');
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
     }
 
     protected function tearDown(): void
