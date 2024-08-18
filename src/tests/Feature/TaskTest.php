@@ -62,7 +62,7 @@ class TaskTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'title' => 'The title field is required.'
+                'title' => 'タイトルが入力されていません。'
             ]);
     }
 
@@ -73,14 +73,14 @@ class TaskTest extends TestCase
     public function test_store_limit_length_title(): void
     {
         $data = [
-            'title' => str_repeat('あ', 256)
+            'title' => str_repeat('あ', 41)
         ];
         $response = $this->postJson('api/tasks', $data);
 
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'title' => 'The title field must not be greater than 255 characters.'
+                'title' => 'タイトルが40文字を超えています。'
             ]);
     }
 
@@ -111,7 +111,7 @@ class TaskTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'title' => 'The title field is required.'
+                'title' => 'タイトルが入力されていません。'
             ]);
     }
 
@@ -122,13 +122,13 @@ class TaskTest extends TestCase
     public function test_update_limit_length_title(): void
     {
         $task = Task::factory()->create();
-        $task->title = str_repeat('あ', 256);
+        $task->title = str_repeat('あ', 41);
         $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
 
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'title' => 'The title field must not be greater than 255 characters.'
+                'title' => 'タイトルが40文字を超えています。'
             ]);
     }
 
