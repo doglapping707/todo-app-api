@@ -22,8 +22,6 @@ docker-compose exec -it server bash
     DB_DATABASE=postgres
     DB_USERNAME=root
     DB_PASSWORD=password
-    ~~略~~
-    SESSION_DRIVER=cookie
     ```
 3. ```php artisan key:generate```を実行し生成したkeyを`APP_KEY`に設定してください。
     ```
@@ -40,8 +38,8 @@ docker-compose exec -it server bash
    ```
 5. 下記の値をコピーし、ファイル毎に設定してください。
    ```
-   SESSION_DOMAIN=localhost
-   SANCTUM_STATEFUL_DOMAINS=http://{フロント側のFQDN}
+   SESSION_DOMAIN={フロント側のドメイン} 例: localhost or example.com
+   SANCTUM_STATEFUL_DOMAINS={フロント側のFQDN} 例: localhost:5173 or www.example.com
    ```
 
 ## API一覧

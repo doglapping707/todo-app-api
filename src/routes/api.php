@@ -15,7 +15,7 @@ use App\Http\Controllers\LoginController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::post('register', [LoginController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
 

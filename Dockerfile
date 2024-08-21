@@ -1,6 +1,6 @@
 FROM php:8.3-apache
 
-# Install Package
+# パッケージをインストール
 RUN apt update && apt install -y \
     git \
     zip \
@@ -8,16 +8,17 @@ RUN apt update && apt install -y \
     libpq-dev \
     && docker-php-ext-install pdo_pgsql pgsql
 
-# Rewrite URL
+# mod_rewriteを有効化
 RUN a2enmod rewrite
 
-# Place Directory
+# ディレクトリをマウント
 COPY ./src /var/www/html
 COPY ./conf/apache/000-default.conf /etc/apache2/sites-enabled
 
-# Install Composer
+# Composerをインストール
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+# ライブラリをインストール
 WORKDIR /var/www/html
 RUN composer install
 
