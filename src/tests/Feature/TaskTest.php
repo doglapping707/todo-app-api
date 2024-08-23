@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class TaskTest extends TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('migrate');
+        $this->artisan('migrate:refresh');
 
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -28,7 +29,9 @@ class TaskTest extends TestCase
      */
     public function test_index(): void
     {
-        $tasks = Task::factory()->count(10)->create();
+        $tasks = Task::factory()->count(10)->create([
+            'user_id' => Auth::id()
+        ]);
         $response = $this->getJson('api/tasks');
 
         $response
@@ -92,9 +95,11 @@ class TaskTest extends TestCase
      * 正常系
      * タスクのタイトルを更新できる
      */
-    public function test_update_title(): void
+    public function test_update(): void
     {
-        $task = Task::factory()->create();
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
         $task->title = 'rewrite';
         $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
 
@@ -108,7 +113,9 @@ class TaskTest extends TestCase
      */
     public function test_update_required_title(): void
     {
-        $task = Task::factory()->create();
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
         $task->title = '';
         $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
 
@@ -125,7 +132,9 @@ class TaskTest extends TestCase
      */
     public function test_update_limit_length_title(): void
     {
-        $task = Task::factory()->create();
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
         $task->title = str_repeat('あ', 41);
         $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
 
@@ -142,7 +151,9 @@ class TaskTest extends TestCase
      */
     public function test_delete(): void
     {
-        $task = Task::factory()->count(10)->create();
+        $task = Task::factory()->count(10)->create([
+            'user_id' => Auth::id()
+        ]);
 
         $response = $this->deleteJson('api/tasks/1');
         $response->assertNoContent();
@@ -157,8 +168,10 @@ class TaskTest extends TestCase
      */
     public function test_updateDone(): void
     {
-        $task = Task::factory()->create();
-        $task->is_done = '1';
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
+        $task->is_done = true;
         $response = $this->patchJson("api/tasks/update-done/{$task->id}", $task->toArray());
 
         $response
@@ -171,14 +184,16 @@ class TaskTest extends TestCase
      */
     public function test_updateDone_required(): void
     {
-        $task = Task::factory()->create();
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
         $task->is_done = '';
         $response = $this->patchJson("api/tasks/update-done/{$task->id}", $task->toArray());
 
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'is_done' => 'The is done field is required.'
+                'is_done' => 'id_doneが空の状態です。'
             ]);
     }
 
@@ -188,14 +203,16 @@ class TaskTest extends TestCase
      */
     public function test_updateDone_limit_type(): void
     {
-        $task = Task::factory()->create();
+        $task = Task::factory()->create([
+            'user_id' => Auth::id()
+        ]);
         $task->is_done = '2';
         $response = $this->patchJson("api/tasks/update-done/{$task->id}", $task->toArray());
 
         $response
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'is_done' => 'The is done field must be true or false.'
+                'is_done' => 'is_doneは真偽値である必要があります。'
             ]);
     }
 }

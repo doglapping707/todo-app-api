@@ -25,4 +25,17 @@ class UpdateDoneTaskRequest extends ApiRequest
             'is_done' => 'required|boolean'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'is_done.required' => 'id_doneが空の状態です。',
+            'is_done.boolean'  => 'is_doneは真偽値である必要があります。',
+        ];
+    }
 }

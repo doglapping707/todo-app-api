@@ -6,9 +6,19 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Requests\UpdateDoneTaskRequest;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:checkUser,task')->only([
+            'updateDone',
+            'update',
+            'destroy'
+        ]);
+    }
+
     /**
      * タスク一覧を取得する
      *
@@ -16,7 +26,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::orderByDesc('id')->get();
+        return Task::where('user_id', Auth::id())->orderByDesc('id')->get();
     }
 
     /**
@@ -27,19 +37,14 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
+        $request->merge([
+            'user_id' => Auth::id()
+        ]);
         $task = Task::create($request->all());
 
         return $task
             ? response()->json($task, 201)
             : response()->json([], 500);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
-    {
-        //
     }
 
     /**
