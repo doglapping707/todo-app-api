@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 40);
             $table->boolean('is_done')->default(false);
+            $table->foreignId('user_id')->constrained();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

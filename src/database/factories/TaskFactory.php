@@ -18,7 +18,8 @@ class TaskFactory extends Factory
     {
         return [
             'title' => $this->faker->realText(rand(15,40)),
-            'is_done' => $this->faker->boolean(10)
+            'is_done' => $this->faker->boolean(10),
+            'user_id' => $this->faker->numberBetween(1,3)
         ];
     }
 }
