@@ -39,7 +39,7 @@ docker-compose exec -it server bash
 5. 下記の値をコピーし、ファイル毎に設定してください。
    ```
    SESSION_DOMAIN={フロント側のドメイン}（例: .example.com）※ローカル以外の場合のみ追加
-   SANCTUM_STATEFUL_DOMAINS={フロント側のFQDN} （例: localhost:5173 or www.example.com）
+   SANCTUM_STATEFUL_DOMAINS={フロント側のFQDN}（例: localhost:5173 or www.example.com）
    ```
 
 ## API一覧
