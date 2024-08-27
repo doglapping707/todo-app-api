@@ -1,7 +1,7 @@
 -- テーブル作成
 CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(40) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     email_verified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     password VARCHAR(255) NOT NULL,
