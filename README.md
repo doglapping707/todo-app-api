@@ -42,7 +42,51 @@ docker-compose exec -it server bash
    SANCTUM_STATEFUL_DOMAINS={フロント側のFQDN}（例: localhost:5173 or www.example.com）
    ```
 
-## API一覧
+## 認証API
+### CSRF保護の初期化API
+```
+curl -i --request GET 'https://todo-api-php.onrender.com/api/sanctum/csrf-cookie'
+```
+
+### アカウント登録API
+```
+curl -i --request POST 'https://todo-api-php.onrender.com/api/register' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: {{ XSRF-TOKENのCookie }}' \
+--data-raw '{
+    "name": "admin",
+    "email": "admin@example.com",
+    "password": "123456789"
+}'
+```
+
+### ログインAPI
+```
+curl -i --request POST 'https://todo-api-php.onrender.com/api/login' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Origin: {{ CORSの許可がされているURL }}' \
+--header 'X-XSRF-TOKEN: 'X-XSRF-TOKEN:{{ XSRF-TOKEN }}' \
+--header 'Cookie: {{ XSRF-TOKENのCookie }}' \
+--data-raw '{
+    "email": "admin@example.com",
+    "password": "123456789"
+}'
+```
+
+### ログアウトAPI
+```
+curl -i --request POST 'https://todo-api-php.onrender.com/api/logout' \
+--header 'Accept: application/json' \
+--header 'Origin: {{ CORSの許可がされているURL }}' \
+--header 'Cookie: {{ XSRF-TOKENのCookie }}' \
+```
+
+## タスクAPI
+
+⚠︎***実行にはアカウント登録APIまたはログインAPIでの認証が必要です。***
+
 ### ▼タスク一覧取得API
 ```
 curl -i --request GET 'https://todo-api-php.onrender.com/api/tasks'
