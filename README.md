@@ -49,7 +49,7 @@ curl -i --request GET 'https://todo-api-php.onrender.com/api/sanctum/csrf-cookie
 ```
 
 ### アカウント登録API
-```
+```bash
 curl -i --request POST 'https://todo-api-php.onrender.com/api/register' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -62,7 +62,7 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/register' \
 ```
 
 ### ログインAPI
-```
+```bash
 curl -i --request POST 'https://todo-api-php.onrender.com/api/login' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -76,7 +76,7 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/login' \
 ```
 
 ### ログアウトAPI
-```
+```bash
 curl -i --request POST 'https://todo-api-php.onrender.com/api/logout' \
 --header 'Accept: application/json' \
 --header 'Origin: {{ CORSの許可がされているURL }}' \
@@ -88,12 +88,12 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/logout' \
 ⚠︎***実行にはアカウント登録APIまたはログインAPIでの認証が必要です。***
 
 ### ▼タスク一覧取得API
-```
+```bash
 curl -i --request GET 'https://todo-api-php.onrender.com/api/tasks'
 ```
 
 ### ▼タスク登録API
-```
+```bash
 curl -i --request POST 'https://todo-api-php.onrender.com/api/tasks' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -102,7 +102,7 @@ curl -i --request POST 'https://todo-api-php.onrender.com/api/tasks' \
 ```
 
 ### ▼タスク更新API
-```
+```bash
 curl -i --request PUT 'https://todo-api-php.onrender.com/api/tasks/1' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -111,7 +111,7 @@ curl -i --request PUT 'https://todo-api-php.onrender.com/api/tasks/1' \
 ```
 
 ### ▼ステータス更新API
-```
+```bash
 curl -i --request PATCH 'https://todo-api-php.onrender.com/api/tasks/update-done/1' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -120,7 +120,7 @@ curl -i --request PATCH 'https://todo-api-php.onrender.com/api/tasks/update-done
 ```
 
 ### ▼タスク削除API
-```
+```bash
 curl -i --request DELETE 'https://todo-api-php.onrender.com/api/tasks/1'
 ```
 
